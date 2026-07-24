@@ -1,0 +1,13 @@
+# ⏰ Digital Clock (HTML, CSS, JS)
+
+A responsive, animated digital clock with a glassmorphism design, live greeting, date display, 12h/24h toggle, and 4 switchable color themes.
+
+## Files
+
+- `index.html` — page structure
+- `style.css` — styling, animations, layout
+- `script.js` — clock logic and interactivity
+
+## Run it
+
+Just open `index.html` in any browser. No build tools needed.
