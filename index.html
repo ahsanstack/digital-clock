@@ -12,11 +12,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="background-glow"></div>
+
     <main class="clock-card">
+      <p class="greeting" id="greeting">Good Day</p>
+
       <div class="time-display">
         <span id="hours">00</span><span class="colon">:</span
         ><span id="minutes">00</span><span class="colon">:</span
         ><span id="seconds">00</span>
+      </div>
+      <p class="date-display" id="date">Monday, January 1, 2026</p>
+      <div class="controls">
+        <button id="formatToggle" class="btn">Switch to 24-Hour</button>
+        <button id="themeToggle" class="btn btn-secondary">Change Theme</button>
       </div>
     </main>
     <script src="script.js"></script>
