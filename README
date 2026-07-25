@@ -2,12 +2,67 @@
 
 A responsive, animated digital clock with a glassmorphism design, live greeting, date display, 12h/24h toggle, and 4 switchable color themes.
 
-## Files
+## Features
 
-- `index.html` — page structure
-- `style.css` — styling, animations, layout
-- `script.js` — clock logic and interactivity
+- Real-time hours, minutes, seconds
+- 12-hour / 24-hour format toggle
+- Auto greeting (Good Morning / Afternoon / Evening / Night)
+- Full date display
+- 4 built-in color themes (Aurora, Ocean, Sunset, Midnight)
+- Fully responsive, no external JS libraries
 
-## Run it
+## Technologies Used
 
-Just open `index.html` in any browser. No build tools needed.
+- HTML5
+- CSS3
+- JavaScript (ES6)
+
+---
+
+## Project Demo
+
+![Digital Clock Demo](animation.gif)
+
+## Project Structure
+
+```
+digital-clock/
+│── index.html
+│── style.css
+│── script.js
+│── Animation.gif
+└── README.md
+```
+
+---
+
+# Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/ahsanstack/digital-clock.git
+```
+
+2. Open the project folder.
+
+3. Open `index.html` in your browser or run it using **Live Server** in Visual Studio Code.
+
+---
+
+## Future Improvements
+
+- Dark/Light mode toggle
+- Alarm functionality
+- Stopwatch
+- Countdown timer
+
+---
+
+## Author
+
+**Ahsan**
+
+- GitHub: https://github.com/ahsanstack
+
+---
