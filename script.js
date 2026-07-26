@@ -1,3 +1,18 @@
+/* ===== Sidebar Navigation ===== */
+const navItems = document.querySelectorAll(".nav-item");
+const tabPanels = document.querySelectorAll(".tab-panel");
+const panelTitle = document.getElementById("panelTitle");
+
+navItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    navItems.forEach((n) => n.classList.remove("active"));
+    tabPanels.forEach((p) => p.classList.remove("active"));
+    item.classList.add("active");
+    document.getElementById(item.dataset.tab).classList.add("active");
+    panelTitle.textContent = item.dataset.title;
+  });
+});
+
 const hoursEl = document.getElementById("hours");
 const minutesEl = document.getElementById("minutes");
 const secondsEl = document.getElementById("seconds");
@@ -5,42 +20,8 @@ const ampmEl = document.getElementById("ampm");
 const dateEl = document.getElementById("date");
 const greetingEl = document.getElementById("greeting");
 const formatToggleBtn = document.getElementById("formatToggle");
-const themeToggleBtn = document.getElementById("themeToggle");
 
 let is24Hour = false;
-
-const themes = [
-  {
-    bg1: "#0f0c29",
-    bg2: "#302b63",
-    bg3: "#24243e",
-    accent: "#00f5d4",
-    accent2: "#f15bb5",
-  },
-  {
-    bg1: "#1a2980",
-    bg2: "#26d0ce",
-    bg3: "#0f2027",
-    accent: "#ffe066",
-    accent2: "#38ef7d",
-  },
-  {
-    bg1: "#3a1c71",
-    bg2: "#d76d77",
-    bg3: "#ffaf7b",
-    accent: "#ffffff",
-    accent2: "#ffd700",
-  },
-  {
-    bg1: "#000000",
-    bg2: "#434343",
-    bg3: "#1c1c1c",
-    accent: "#00ff9c",
-    accent2: "#00b8ff",
-  },
-];
-
-let themeIndex = 0;
 
 function pad(num) {
   return num.toString().padStart(2, "0");
@@ -62,7 +43,6 @@ function updateClock() {
 
   updateGreeting(hours);
 
-  let ampmText = "";
   if (!is24Hour) {
     ampmText = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
@@ -94,20 +74,5 @@ formatToggleBtn.addEventListener("click", () => {
   updateClock();
 });
 
-function applyTheme(theme) {
-  const root = document.documentElement.style;
-  root.setProperty("--bg-1", theme.bg1);
-  root.setProperty("--bg-2", theme.bg2);
-  root.setProperty("--bg-3", theme.bg3);
-  root.setProperty("--accent", theme.accent);
-  root.setProperty("--accent-2", theme.accent2);
-}
-
-themeToggleBtn.addEventListener("click", () => {
-  themeIndex = (themeIndex + 1) % themes.length;
-  applyTheme(themes[themeIndex]);
-});
-
-applyTheme(themes[themeIndex]);
 updateClock();
 setInterval(updateClock, 1000);

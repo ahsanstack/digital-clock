@@ -12,23 +12,85 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="background-glow"></div>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <svg viewBox="0 0 24 24" class="brand-icon">
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+            />
+            <path
+              d="M12 7v5l3 2"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>digital</span>
+        </div>
 
-    <main class="clock-card">
-      <p class="greeting" id="greeting">Good Day</p>
+        <nav class="nav-menu">
+          <button
+            class="nav-item active"
+            data-tab="clock-panel"
+            data-title="Clock"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+              />
+              <path
+                d="M12 7v5l3 2"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Clock</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">v2.0</div>
+      </aside>
 
-      <div class="time-display">
-        <span id="hours">00</span><span class="colon">:</span
-        ><span id="minutes">00</span><span class="colon">:</span
-        ><span id="seconds">00</span>
-        <span id="ampm" class="ampm">AM</span>
+      <div class="main-area">
+        <header class="topbar">
+          <h1 class="panel-title" id="panelTitle">Clock</h1>
+        </header>
+
+        <div class="content">
+          <section id="clock-panel" class="tab-panel active">
+            <div class="panel-card">
+              <p class="greeting" id="greeting">Good Day</p>
+
+              <div class="time-display">
+                <span id="hours">00</span><span class="colon">:</span
+                ><span id="minutes">00</span><span class="colon">:</span
+                ><span id="seconds">00</span>
+                <span id="ampm" class="ampm">AM</span>
+              </div>
+              <p class="date-display" id="date">Monday, January 1, 2026</p>
+              <div class="controls">
+                <button id="formatToggle" class="btn">Switch to 24-Hour</button>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-      <p class="date-display" id="date">Monday, January 1, 2026</p>
-      <div class="controls">
-        <button id="formatToggle" class="btn">Switch to 24-Hour</button>
-        <button id="themeToggle" class="btn btn-secondary">Change Theme</button>
-      </div>
-    </main>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
