@@ -64,6 +64,7 @@ function updateClock() {
     day: "numeric",
   };
   dateEl.textContent = now.toLocaleDateString("en-US", options);
+  checkAlarms(now);
 }
 
 formatToggleBtn.addEventListener("click", () => {
@@ -72,6 +73,105 @@ formatToggleBtn.addEventListener("click", () => {
     ? "Switch to 12-Hour"
     : "Switch to 24-Hour";
   updateClock();
+});
+
+/* ===== Beep sound (no audio file needed) ===== */
+function playBeep(duration = 250, frequency = 880, times = 1) {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new AudioCtx();
+  let i = 0;
+
+  function beepOnce() {
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+    oscillator.start();
+    oscillator.stop(ctx.currentTime + duration / 1000);
+    i++;
+    if (i < times) setTimeout(beepOnce, duration + 150);
+  }
+  beepOnce();
+}
+
+/* ===== Alarm ===== */
+const alarmInput = document.getElementById("alarmInput");
+const addAlarmBtn = document.getElementById("addAlarmBtn");
+const alarmList = document.getElementById("alarmList");
+const alarmRinging = document.getElementById("alarmRinging");
+const dismissAlarmBtn = document.getElementById("dismissAlarmBtn");
+
+let alarms = [];
+let ringingAlarmId = null;
+
+function renderAlarms() {
+  alarmList.innerHTML = "";
+  alarms.forEach((alarm) => {
+    const li = document.createElement("li");
+    if (!alarm.enabled) li.classList.add("disabled");
+
+    const label = document.createElement("span");
+    label.textContent = formatAlarmTime(alarm.time);
+
+    const controlsWrap = document.createElement("span");
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "alarm-toggle";
+    toggleBtn.textContent = alarm.enabled ? "ON" : "OFF";
+    toggleBtn.addEventListener("click", () => {
+      alarm.enabled = !alarm.enabled;
+      renderAlarms();
+    });
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-btn";
+    removeBtn.textContent = "✕";
+    removeBtn.addEventListener("click", () => {
+      alarms = alarms.filter((a) => a.id !== alarm.id);
+      renderAlarms();
+    });
+    controlsWrap.appendChild(toggleBtn);
+    controlsWrap.appendChild(removeBtn);
+    li.appendChild(label);
+    li.appendChild(controlsWrap);
+    alarmList.appendChild(li);
+  });
+}
+
+function formatAlarmTime(time24) {
+  const [h, m] = time24.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  let hour = h % 12;
+  hour = hour === 0 ? 12 : hour;
+  return `${pad(hour)}:${pad(m)} ${period}`;
+}
+
+addAlarmBtn.addEventListener("click", () => {
+  if (!alarmInput.value) return;
+  alarms.push({ id: Date.now(), time: alarmInput.value, enabled: true });
+  alarmInput.value = "";
+  renderAlarms();
+});
+
+function checkAlarms(now) {
+  if (ringingAlarmId !== null) return;
+  const currentHM = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  if (now.getSeconds() !== 0) return;
+
+  const match = alarms.find((a) => a.enabled && a.time === currentHM);
+  if (match) {
+    ringingAlarmId = match.id;
+    alarmRinging.classList.remove("hidden");
+    playBeep(300, 880, 6);
+  }
+}
+
+dismissAlarmBtn.addEventListener("click", () => {
+  alarmRinging.classList.add("hidden");
+  ringingAlarmId = null;
 });
 
 updateClock();

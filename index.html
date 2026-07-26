@@ -62,6 +62,25 @@
             </svg>
             <span>Clock</span>
           </button>
+          <button class="nav-item" data-tab="alarm-panel" data-title="Alarm">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 3a6 6 0 0 0-6 6v3.2c0 .5-.2 1-.5 1.4L4 16h16l-1.5-2.4c-.3-.4-.5-.9-.5-1.4V9a6 6 0 0 0-6-6Z"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.5 19a2.5 2.5 0 0 0 5 0"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>Alarm</span>
+          </button>
         </nav>
         <div class="sidebar-footer">v2.0</div>
       </aside>
@@ -85,6 +104,25 @@
               <p class="date-display" id="date">Monday, January 1, 2026</p>
               <div class="controls">
                 <button id="formatToggle" class="btn">Switch to 24-Hour</button>
+              </div>
+            </div>
+          </section>
+          <section id="alarm-panel" class="tab-panel">
+            <div class="panel-card">
+              <p class="panel-subtitle">Set an Alarm</p>
+
+              <div class="row-inputs">
+                <input type="time" id="alarmInput" class="input-field" />
+                <button id="addAlarmBtn" class="btn">Add Alarm</button>
+              </div>
+
+              <ul id="alarmList" class="item-list"></ul>
+
+              <div id="alarmRinging" class="ringing-banner hidden">
+                ⏰ Alarm ringing!
+                <button id="dismissAlarmBtn" class="btn btn-secondary">
+                  Dismiss
+                </button>
               </div>
             </div>
           </section>
