@@ -176,3 +176,62 @@ dismissAlarmBtn.addEventListener("click", () => {
 
 updateClock();
 setInterval(updateClock, 1000);
+
+/* ===== Stopwatch ===== */
+const stopwatchDisplay = document.getElementById("stopwatchDisplay");
+const swStartBtn = document.getElementById("swStartBtn");
+const swLapBtn = document.getElementById("swLapBtn");
+const swResetBtn = document.getElementById("swResetBtn");
+const lapList = document.getElementById("lapList");
+
+let swRunning = false;
+let swStartTime = 0;
+let swElapsed = 0;
+let swIntervalId = null;
+let lapCount = 0;
+
+function formatStopwatch(ms) {
+  const totalMs = Math.floor(ms);
+  const centis = Math.floor((totalMs % 1000) / 10);
+  const totalSeconds = Math.floor(totalMs / 1000);
+  const secs = totalSeconds % 60;
+  const mins = Math.floor(totalSeconds / 60) % 60;
+  const hrs = Math.floor(totalSeconds / 3600);
+  return `${pad(hrs)}:${pad(mins)}:${pad(secs)}.${pad(centis)}`;
+}
+
+function tickStopwatch() {
+  swElapsed = Date.now() - swStartTime;
+  stopwatchDisplay.textContent = formatStopwatch(swElapsed);
+}
+
+swStartBtn.addEventListener("click", () => {
+  if (!swRunning) {
+    swRunning = true;
+    swStartTime = Date.now() - swElapsed;
+    swIntervalId = setInterval(tickStopwatch, 10);
+    swStartBtn.textContent = "Pause";
+  } else {
+    swRunning = false;
+    clearInterval(swIntervalId);
+    swStartBtn.textContent = "Start";
+  }
+});
+
+swLapBtn.addEventListener("click", () => {
+  if (!swRunning) return;
+  lapCount++;
+  const li = document.createElement("li");
+  li.innerHTML = `<span>Lap ${lapCount}</span><span>${formatStopwatch(swElapsed)}</span>`;
+  lapList.prepend(li);
+});
+
+swResetBtn.addEventListener("click", () => {
+  swRunning = false;
+  clearInterval(swIntervalId);
+  swElapsed = 0;
+  lapCount = 0;
+  stopwatchDisplay.textContent = "00:00:00.00";
+  swStartBtn.textContent = "Start";
+  lapList.innerHTML = "";
+});

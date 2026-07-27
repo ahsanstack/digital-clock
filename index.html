@@ -81,6 +81,45 @@
             </svg>
             <span>Alarm</span>
           </button>
+          <button
+            class="nav-item"
+            data-tab="stopwatch-panel"
+            data-title="Stopwatch"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect
+                x="9"
+                y="2"
+                width="6"
+                height="2.4"
+                rx="1"
+                fill="currentColor"
+              />
+              <circle
+                cx="12"
+                cy="14"
+                r="8"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+              />
+              <path
+                d="M12 10v4l3 2"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M18.5 6.5l1.3-1.3"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>Stopwatch</span>
+          </button>
         </nav>
         <div class="sidebar-footer">v2.0</div>
       </aside>
@@ -124,6 +163,21 @@
                   Dismiss
                 </button>
               </div>
+            </div>
+          </section>
+          <section id="stopwatch-panel" class="tab-panel">
+            <div class="panel-card">
+              <p class="panel-subtitle">Stopwatch</p>
+
+              <div class="mono-display" id="stopwatchDisplay">00:00:00.00</div>
+
+              <div class="controls">
+                <button id="swStartBtn" class="btn">Start</button>
+                <button id="swLapBtn" class="btn btn-secondary">Lap</button>
+                <button id="swResetBtn" class="btn btn-secondary">Reset</button>
+              </div>
+
+              <ul id="lapList" class="item-list"></ul>
             </div>
           </section>
         </div>
