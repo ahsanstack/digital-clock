@@ -235,3 +235,70 @@ swResetBtn.addEventListener("click", () => {
   swStartBtn.textContent = "Start";
   lapList.innerHTML = "";
 });
+
+/* ===== Countdown Timer ===== */
+const timerMinutesInput = document.getElementById("timerMinutes");
+const timerSecondsInput = document.getElementById("timerSeconds");
+const timerDisplay = document.getElementById("timerDisplay");
+const timerStartBtn = document.getElementById("timerStartBtn");
+const timerResetBtn = document.getElementById("timerResetBtn");
+const timerDone = document.getElementById("timerDone");
+const dismissTimerBtn = document.getElementById("dismissTimerBtn");
+
+let timerRunning = false;
+let timerRemaining = 0;
+let timerIntervalId = null;
+
+function formatTimer(totalSeconds) {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  return `${pad(m)}:${pad(s)}`;
+}
+
+function tickTimer() {
+  if (timerRemaining <= 0) {
+    clearInterval(timerIntervalId);
+    timerRunning = false;
+    timerStartBtn.textContent = "Start";
+    timerDone.classList.remove("hidden");
+    playBeep(300, 660, 4);
+    return;
+  }
+  timerRemaining--;
+  timerDisplay.textContent = formatTimer(timerRemaining);
+}
+
+timerStartBtn.addEventListener("click", () => {
+  if (!timerRunning) {
+    if (timerRemaining <= 0) {
+      const mins = parseInt(timerMinutesInput.value) || 0;
+      const secs = parseInt(timerSecondsInput.value) || 0;
+      timerRemaining = mins * 60 + secs;
+      if (timerRemaining <= 0) return;
+    }
+    timerDone.classList.add("hidden");
+    timerRunning = true;
+    timerStartBtn.textContent = "Pause";
+    timerDisplay.textContent = formatTimer(timerRemaining);
+    timerIntervalId = setInterval(tickTimer, 1000);
+  } else {
+    timerRunning = false;
+    clearInterval(timerIntervalId);
+    timerStartBtn.textContent = "Start";
+  }
+});
+
+timerResetBtn.addEventListener("click", () => {
+  timerRunning = false;
+  clearInterval(timerIntervalId);
+  timerRemaining = 0;
+  timerDisplay.textContent = "00:00";
+  timerStartBtn.textContent = "Start";
+  timerDone.classList.add("hidden");
+  timerMinutesInput.value = "";
+  timerSecondsInput.value = "";
+});
+
+dismissTimerBtn.addEventListener("click", () => {
+  timerDone.classList.add("hidden");
+});

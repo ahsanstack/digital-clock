@@ -120,6 +120,25 @@
             </svg>
             <span>Stopwatch</span>
           </button>
+
+          <button class="nav-item" data-tab="timer-panel" data-title="Timer">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M7 3h10M7 21h10"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+              <path
+                d="M7 3c0 5 5 5 5 9s-5 4-5 9M17 3c0 5-5 5-5 9s5 4 5 9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Timer</span>
+          </button>
         </nav>
         <div class="sidebar-footer">v2.0</div>
       </aside>
@@ -178,6 +197,47 @@
               </div>
 
               <ul id="lapList" class="item-list"></ul>
+            </div>
+          </section>
+          <section id="timer-panel" class="tab-panel">
+            <div class="panel-card">
+              <p class="panel-subtitle">Countdown Timer</p>
+
+              <div class="row-inputs">
+                <input
+                  type="number"
+                  id="timerMinutes"
+                  class="input-field small"
+                  placeholder="MM"
+                  min="0"
+                  max="99"
+                />
+                <span class="sep">:</span>
+                <input
+                  type="number"
+                  id="timerSeconds"
+                  class="input-field small"
+                  placeholder="SS"
+                  min="0"
+                  max="59"
+                />
+              </div>
+
+              <div class="mono-display" id="timerDisplay">00:00</div>
+
+              <div class="controls">
+                <button id="timerStartBtn" class="btn">Start</button>
+                <button id="timerResetBtn" class="btn btn-secondary">
+                  Reset
+                </button>
+              </div>
+
+              <div id="timerDone" class="ringing-banner hidden">
+                ⏳ Time's up!
+                <button id="dismissTimerBtn" class="btn btn-secondary">
+                  Dismiss
+                </button>
+              </div>
             </div>
           </section>
         </div>

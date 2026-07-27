@@ -438,3 +438,14 @@ body {
   margin: 10px 0 22px;
   text-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
 }
+
+.input-field.small {
+  width: 70px;
+  text-align: center;
+}
+
+.sep {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  color: var(--accent-2);
+}
