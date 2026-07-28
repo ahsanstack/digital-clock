@@ -74,6 +74,7 @@ formatToggleBtn.addEventListener("click", () => {
     ? "Switch to 12-Hour"
     : "Switch to 24-Hour";
   updateClock();
+  saveSettings();
 });
 
 /* ===== Beep sound (no audio file needed) ===== */
@@ -125,6 +126,7 @@ function renderAlarms() {
     toggleBtn.addEventListener("click", () => {
       alarm.enabled = !alarm.enabled;
       renderAlarms();
+      saveSettings();
     });
 
     const removeBtn = document.createElement("button");
@@ -133,6 +135,7 @@ function renderAlarms() {
     removeBtn.addEventListener("click", () => {
       alarms = alarms.filter((a) => a.id !== alarm.id);
       renderAlarms();
+      saveSettings();
     });
     controlsWrap.appendChild(toggleBtn);
     controlsWrap.appendChild(removeBtn);
@@ -155,6 +158,7 @@ addAlarmBtn.addEventListener("click", () => {
   alarms.push({ id: Date.now(), time: alarmInput.value, enabled: true });
   alarmInput.value = "";
   renderAlarms();
+  saveSettings();
 });
 
 function checkAlarms(now) {
@@ -410,11 +414,41 @@ function renderThemeSwatches() {
       themeIndex = index;
       applyTheme(theme);
       renderThemeSwatches();
+      saveSettings();
     });
 
     themeSwatchesContainer.appendChild(swatch);
   });
 }
+/* Saves theme, 12/24-hour choice, and your alarms to the browser
+   so they're still here the next time you open this page. */
+const STORAGE_KEY = "auroraClockSettings";
 
+function saveSettings() {
+  const data = { themeIndex, is24Hour, alarms };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function loadSettings() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) return;
+
+  try {
+    const data = JSON.parse(saved);
+    if (typeof data.themeIndex === "number") themeIndex = data.themeIndex;
+    if (typeof data.is24Hour === "boolean") {
+      is24Hour = data.is24Hour;
+      formatToggleBtn.textContent = is24Hour
+        ? "Switch to 12-Hour"
+        : "Switch to 24-Hour";
+    }
+    if (Array.isArray(data.alarms)) alarms = data.alarms;
+  } catch (e) {
+    console.warn("Could not load saved settings:", e);
+  }
+}
+
+loadSettings();
 renderThemeSwatches();
 applyTheme(themes[themeIndex]);
+renderAlarms();
