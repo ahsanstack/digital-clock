@@ -169,6 +169,20 @@ function checkAlarms(now) {
   }
 }
 
+const snoozeAlarmBtn = document.getElementById("snoozeAlarmBtn");
+
+snoozeAlarmBtn.addEventListener("click", () => {
+  // creates a new alarm 5 minutes ahead, then hides the ringing banner
+  const snoozeTime = new Date(Date.now() + 5 * 60 * 1000);
+  const snoozeHM = `${pad(snoozeTime.getHours())}:${pad(snoozeTime.getMinutes())}`;
+  alarms.push({ id: Date.now(), time: snoozeHM, enabled: true });
+  renderAlarms();
+  saveSettings();
+
+  alarmRinging.classList.add("hidden");
+  ringingAlarmId = null;
+});
+
 dismissAlarmBtn.addEventListener("click", () => {
   alarmRinging.classList.add("hidden");
   ringingAlarmId = null;
