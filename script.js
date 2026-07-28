@@ -64,6 +64,7 @@ function updateClock() {
     day: "numeric",
   };
   dateEl.textContent = now.toLocaleDateString("en-US", options);
+
   checkAlarms(now);
 }
 
@@ -316,3 +317,104 @@ timerResetBtn.addEventListener("click", () => {
 dismissTimerBtn.addEventListener("click", () => {
   timerDone.classList.add("hidden");
 });
+/* ===== Themes ===== */
+const themeSwatchesContainer = document.getElementById("themeSwatches");
+const miniClock = document.getElementById("miniClock");
+
+const themes = [
+  {
+    name: "Aurora",
+    bg1: "#0f0c29",
+    bg2: "#302b63",
+    bg3: "#24243e",
+    accent: "#00f5d4",
+    accent2: "#f15bb5",
+  },
+  {
+    name: "Ocean",
+    bg1: "#1a2980",
+    bg2: "#26d0ce",
+    bg3: "#0f2027",
+    accent: "#ffe066",
+    accent2: "#38ef7d",
+  },
+  {
+    name: "Sunset",
+    bg1: "#3a1c71",
+    bg2: "#d76d77",
+    bg3: "#ffaf7b",
+    accent: "#ffffff",
+    accent2: "#ffd700",
+  },
+  {
+    name: "Midnight",
+    bg1: "#000000",
+    bg2: "#434343",
+    bg3: "#1c1c1c",
+    accent: "#00ff9c",
+    accent2: "#00b8ff",
+  },
+  {
+    name: "Forest",
+    bg1: "#0b3d0b",
+    bg2: "#145214",
+    bg3: "#0d2b0d",
+    accent: "#a3ff00",
+    accent2: "#ffb703",
+  },
+  {
+    name: "Rose Gold",
+    bg1: "#3d1c2f",
+    bg2: "#6b2f4a",
+    bg3: "#24101c",
+    accent: "#ffd1a9",
+    accent2: "#ff6f91",
+  },
+  {
+    name: "Cyberpunk",
+    bg1: "#0d0221",
+    bg2: "#260446",
+    bg3: "#1a012c",
+    accent: "#f21170",
+    accent2: "#00f6ff",
+  },
+  {
+    name: "Coffee",
+    bg1: "#2c1810",
+    bg2: "#4a2c1d",
+    bg3: "#1c0f08",
+    accent: "#e0a458",
+    accent2: "#ffd29d",
+  },
+];
+let themeIndex = 0;
+
+function applyTheme(theme) {
+  const root = document.documentElement.style;
+  root.setProperty("--bg-1", theme.bg1);
+  root.setProperty("--bg-2", theme.bg2);
+  root.setProperty("--bg-3", theme.bg3);
+  root.setProperty("--accent", theme.accent);
+  root.setProperty("--accent-2", theme.accent2);
+}
+
+function renderThemeSwatches() {
+  themeSwatchesContainer.innerHTML = "";
+  themes.forEach((theme, index) => {
+    const swatch = document.createElement("button");
+    swatch.className = "swatch" + (index === themeIndex ? " active" : "");
+    swatch.style.background = `linear-gradient(135deg, ${theme.bg2}, ${theme.accent})`;
+    swatch.title = theme.name;
+
+    swatch.addEventListener("click", () => {
+      themeIndex = index;
+      applyTheme(theme);
+      renderThemeSwatches();
+    });
+
+    themeSwatchesContainer.appendChild(swatch);
+  });
+}
+
+renderThemeSwatches();
+applyTheme(themes[themeIndex]);
