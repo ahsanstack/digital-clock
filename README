@@ -27,7 +27,7 @@ A modern, responsive digital clock built with HTML, CSS, and JavaScript, featuri
 
 ## Project Demo
 
-![Digital Clock Demo](Full Project.gif)
+![Project Demo](assets/Full-project.gif)
 
 ## Project Structure
 
@@ -38,9 +38,8 @@ DigitalClock/
 ├── script.js           # Application logic
 ├── README.md           # Documentation
 └── assets/            # Images and other assets
-    ├── animation/
-    └── fullproject/
-    └── screenshots/
+    ├── animation.gif/
+    └── Full-project.gif/
 ```
 
 ---
