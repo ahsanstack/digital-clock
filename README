@@ -1,6 +1,6 @@
 # ⏰ Digital Clock (HTML, CSS, JS)
 
-A responsive, animated digital clock with a glassmorphism design, live greeting, date display, 12h/24h toggle, and 4 switchable color themes.
+A modern, responsive digital clock built with HTML, CSS, and JavaScript, featuring a sleek glassmorphism interface, live clock and date, dynamic greetings, 12/24-hour format toggle, smart alarms with snooze, stopwatch, countdown timer, 8 customizable themes, and persistent settings using Local Storage.
 
 ## Features
 
@@ -8,30 +8,39 @@ A responsive, animated digital clock with a glassmorphism design, live greeting,
 - 12-hour / 24-hour format toggle
 - Auto greeting (Good Morning / Afternoon / Evening / Night)
 - Full date display
-- 4 built-in color themes (Aurora, Ocean, Sunset, Midnight)
-- Fully responsive, no external JS libraries
+- Smart alarm with ring, dismiss, and snooze options
+- Built-in stopwatch with start, pause, reset, and lap tracking
+- Countdown timer with custom duration
+- 8 beautiful built-in themes
+- Automatically saves selected theme after refresh
+- Automatically saves alarms after refresh
+- Fully responsive design for desktop, tablet, and mobile
 
 ## Technologies Used
 
 - HTML5
 - CSS3
 - JavaScript (ES6)
+- Local Storage API
 
 ---
 
 ## Project Demo
 
-![Digital Clock Demo](Animation.gif)
+![Digital Clock Demo](Full Project.gif)
 
 ## Project Structure
 
 ```
-digital-clock/
-│── index.html
-│── style.css
-│── script.js
-│── Animation.gif
-└── README.md
+DigitalClock/
+├── index.html          # Main HTML file
+├── styles.css          # All styles and themes
+├── script.js           # Application logic
+├── README.md           # Documentation
+└── assets/            # Images and other assets
+    ├── animation/
+    └── fullproject/
+    └── screenshots/
 ```
 
 ---
@@ -52,10 +61,8 @@ git clone https://github.com/ahsanstack/digital-clock.git
 
 ## Future Improvements
 
-- Dark/Light mode toggle
-- Alarm functionality
-- Stopwatch
-- Countdown timer
+- Custom alarm sounds
+- World Clock
 
 ---
 
